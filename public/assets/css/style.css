@@ -1,0 +1,25 @@
+
+body{font-family:arial}
+.logoutbtn{width:110px; font-size:12px; font-weight:bold; padding:3px 25px; border:0px; background:#E2E2E2;color:black}
+aside ul{font-size:13px; border:1px solid;}
+aside ul li{padding:5px 10px; text-align:left}
+aside ul li a{color:#1C5978}
+.bordered{border:1px solid gray;}
+.bordertop{border-top:1px solid gray;}
+.bordertb{border-top:1px solid; border-bottom:1px solid gray}
+.footer-line{background:#1C5978; height:32px; margin-bottom:30px}
+.login-table-input{width:180px; border-top:2px solid silver; padding:2px 5px; font-weight:normal; font-size:14; border-radius:4px}
+.login-table-text{font-weight:normal; font-size:14px;}
+aside ul p{font-size:10px; margin:0px; padding:0px; line-height:1; color:gray; letter-spacing:0.5; padding-top:1px}
+aside ul li:hover{padding:2px 0px 2px 10px; font-size:120%; font-weight:bold;}
+aside a:hover{text-decoration:none;}
+p{font-size:13px}
+.table1{font-weight:bold; border:1px solid;width:100%; font-size:13px}
+.table-1-head, .table-1-row{width:500px;border-bottom:1px solid}
+.srchbtn, .delbtn, .savebtn, .cnclbtn{width:80px; color:white; background:#1C5978; border:none; font-weight:normal; font-size:13px; padding:2px 15px}
+.srchbtn:hover, .delbtn:hover, .savebtn:hover, .cnclbtn:hover{color:white; background:#00495C}
+.table2{width:100%;text-align:center; margin-top:30px; margin-bottom:40px}
+.table2, .table2 tr, .table2 td, .table2 th {border:1px solid; border-collapse:collapse; text-align:center; font-size:13px}
+.table2 tr, .table2 td, .table2 th {padding:3px}
+.addpage-table,.addpage-table tr{width:100%; border:1px solid silver; font-size:12px}
+.addpage-table td {padding:5px 5px; }

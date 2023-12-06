@@ -1,0 +1,21 @@
+.orange{background:red; font-weight: bold; color:black}
+.yellow{background:yellow; font-weight: bold; color:black}
+.orange{background:orange; font-weight: bold; color:black}
+.pink{background:pink; font-weight: bold; color:black}
+.cyan{background:cyan; font-weight: bold; color:black}
+
+/*-------------Dark colours----------------------------*/
+
+.brown{background:brown; font-weight: bold; color:white}
+.black{background:black; font-weight: bold; color:white}
+.red{background:red; font-weight: bold; color:white}
+.green{background:green; font-weight: bold; color:white}
+.text-red{color:red}
+.text-blue{color:blue}
+.text-green{color:green}
+.text-orange{color:orange}
+.text-pink{color:pink}
+.text-cyan{color:cyan}
+.text-gray{color:gray}
+.text-silver{color:silver}
+.text-lightgray{color:lightgray}
