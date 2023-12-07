@@ -20,21 +20,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Display the forms
-Route::get('/', [ViewController::class, 'loginForm'])->name('login');
+Route::controller(ViewController::class)->group(function() {
 
-Route::get('/upload-csv', [ViewController::class, 'uploadCsv'])->name('upload.csv');
+    Route::get('/','loginForm')->name('login');
+    Route::get('/upload-csv','uploadCsv')->name('upload.csv');
+    Route::get('/upload-image','uploadImage')->name('upload.image');
+    Route::get('/change-password', 'changePassword')->name('change.password');
 
-Route::get('/upload-image', [ViewController::class, 'uploadImage'])->name('upload.image');
-
-Route::get('/change-password', [ViewController::class, 'changePassword'])->name('change.password');
-
+});
 
 // login form data
 Route::post('/login-data', [LoginController::class, 'loginData']);
-
 // Log out the user
 Route::get('/logout', [LoginController::class, 'logout']);
-
 // Process the password change form data
 Route::post('/password-change-process', [LoginController::class, 'passwordChange']);
 
@@ -45,5 +43,5 @@ Route::post('/image-data', [InventoryItemsController::class, 'imageData']);
 Route::post('/generate-pdf', [CsvToPdfController::class, 'generatePdf']);
 
 // Generate a zip file
-Route::post('/generate-zip', [ImageZipController::class, 'generateZip']);
+Route::post('/generate-zip', [ImageZipController::class, 'convertZipFile']);
 

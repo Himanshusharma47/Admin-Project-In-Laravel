@@ -9,6 +9,12 @@ use TCPDF;
 
 class CsvToPdfController extends Controller
 {
+     /**
+     * Generate a PDF document from CSV data.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function generatePdf(Request $request)
     {
         try {
@@ -16,19 +22,12 @@ class CsvToPdfController extends Controller
                 'csv_file' => 'required|mimes:csv,txt',
             ]);
 
-            // Read the CSV file
             $csvData = $this->readCsv($request->file('csv_file'));
 
-            // Get the selected options
-            $selectedOptions = $request->only(['sku', 'qty', 'orderId', 'orderNotes', 'invoiceNumber']);
+            $pdf = $this->generateTcpdf($csvData);
 
-            // Generate PDF with TCPDF and return a download response
-            $pdf = $this->generateTcpdf($csvData, $selectedOptions);
+            $pdfOutput = $pdf->Output('csv_file_pdf.pdf', 'S');
 
-            // Generate the PDF output
-            $pdfOutput = $pdf->Output('generated_pdf.pdf', 'S');
-
-            // Send the PDF as a downloadable response
             return Response::make($pdfOutput, 200, [
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'inline; filename=generated_pdf.pdf',
@@ -39,15 +38,19 @@ class CsvToPdfController extends Controller
         }
     }
 
+     /**
+     * Read CSV data from the uploaded file.
+     *
+     * @param  \Illuminate\Http\UploadedFile  $csvFile
+     * @return array
+     */
     private function readCsv($csvFile)
     {
         $handle = fopen($csvFile->getPathname(), 'r');
         $data = [];
 
-        // Skip the header row
         fgetcsv($handle);
 
-        // Process each row in the CSV file
         while (($row = fgetcsv($handle)) !== false) {
             $data[] = $row;
         }
@@ -57,47 +60,39 @@ class CsvToPdfController extends Controller
         return $data;
     }
 
-    private function generateTcpdf($data, $selectedOptions)
-{
-    // Create a new TCPDF instance
-    $pdf = new TCPDF();
-    $pdf->SetAutoPageBreak(true, 10);
+    /**
+     * Generate a PDF document using TCPDF.
+     *
+     * @param  array  $data
+     * @return \TCPDF
+     */
+    private function generateTcpdf($data)
+    {
+        $pdf = new TCPDF();
+        $pdf->SetAutoPageBreak(true, 10);
+        $pdf->SetFont('helvetica', '', 12);
 
-    // Set PDF content
-    $pdf->SetFont('helvetica', '', 12);
+        foreach ($data as $row) {
+            $skuCode = $row[0];
+            $inventoryItem = InventoryItem::where('sku_code', $skuCode)->first();
 
-    foreach ($data as $row) {
-        // first column contains the sku code
-        $skuCode = $row[0];
+            $pdf->AddPage();
 
-        $inventoryItem = InventoryItem::where('sku_code', $skuCode)->first();
-
-        // Add a new page for each row
-        $pdf->AddPage();
-
-        // Image center
-        if ($inventoryItem && !empty($inventoryItem->images)) {
-            $image = $inventoryItem->images;
-            $imageX = ($pdf->getPageWidth() - 120) / 2;
-            $pdf->Image($image, $imageX, 70, 120);
-        }
-
-        // selected options to the top center of the PDF
-        $options = [];
-        foreach ($selectedOptions as $option => $value) {
-            if ($value && isset($row[array_search($option, $data[0])])) {
-                $options[] = ucfirst($option) . ': ' . $row[array_search($option, $data[0])];
+            // Image center logic
+            if ($inventoryItem && !empty($inventoryItem->images)) {
+                $image = $inventoryItem->images;
+                $imageX = ($pdf->getPageWidth() - 130) / 2;
+                $pdf->Image($image, $imageX, 70, 130);
             }
+
+            // SKU value at the top center
+            $pdf->SetY(20);
+            $pdf->SetX($pdf->getPageWidth() / 2);
+            $pdf->Cell(10, 10, 'SKU: ' . $skuCode, 0, 1, 'C');
         }
 
-        // Center the text
-        $optionsText = implode('.', $options);
-        $optionsX = ($pdf->getPageWidth() - $pdf->GetStringWidth($optionsText)) / 2;
-        $pdf->SetXY($optionsX,10);
-        $pdf->Cell(0, 10, $optionsText, 0, 1, 'C');
+        return $pdf;
     }
 
-    return $pdf;
-}
 
 }

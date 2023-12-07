@@ -39,18 +39,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Options</td>
-                                <td>
-                                    Sku <input type="checkbox" name="sku" id="sku" accept=".csv" checked> <br>
-                                    Qty <input type="checkbox" name="qty" id="qty" accept=".csv"> <br>
-                                    Order Id <input type="checkbox" name="orderId" id="orderId" accept=".csv"> <br>
-                                    Order Notes <input type="checkbox" name="orderNotes" id="orderNotes" accept=".csv">
-                                    <br>
-                                    Invoice Number <input type="checkbox" name="invoiceNumber" id="invoiceNumber"
-                                        accept=".csv">
-                                </td>
-                            </tr>
-                            <tr>
                                 <td></td>
                                 <td colspan="2">
                                     <button class="srchbtn" type="submit" onclick="setAction('pdf')">Download Pdf</button>
@@ -65,6 +53,7 @@
     </aside>
 @endsection
 @section('script')
+{{-- script use for take action by clicking button --}}
 <script>
     function setAction(type) {
         var form = document.getElementById('uploadForm');

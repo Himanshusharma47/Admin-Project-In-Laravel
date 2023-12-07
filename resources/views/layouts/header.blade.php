@@ -33,7 +33,7 @@
             <div class="col-md-3">
                 <p
                     style="color:white; font-weight:bold; font-family:arial; font-size:12px; margin:7px 0px; float:left; letter-spacing:1; word-spacing:3">
-                    Friday, 8th June 2012</p>
+                    {{\Carbon\Carbon::now()->format('l, jS F Y')}}</p>
             </div>
         </div>
     </div>

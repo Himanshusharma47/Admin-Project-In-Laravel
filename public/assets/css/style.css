@@ -7,7 +7,7 @@ aside ul li a{color:#1C5978}
 .bordered{border:1px solid gray;}
 .bordertop{border-top:1px solid gray;}
 .bordertb{border-top:1px solid; border-bottom:1px solid gray}
-.footer-line{background:#1C5978; height:32px; margin-bottom:30px}
+.footer-line{background:#1C5978; height:32px; margin-bottom:30px; position:relative; top:230px;}
 .login-table-input{width:180px; border-top:2px solid silver; padding:2px 5px; font-weight:normal; font-size:14; border-radius:4px}
 .login-table-text{font-weight:normal; font-size:14px;}
 aside ul p{font-size:10px; margin:0px; padding:0px; line-height:1; color:gray; letter-spacing:0.5; padding-top:1px}

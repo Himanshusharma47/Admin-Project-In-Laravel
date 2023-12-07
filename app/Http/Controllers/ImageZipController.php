@@ -9,21 +9,26 @@ use ZipArchive;
 
 class ImageZipController extends Controller
 {
-    public function generateZip(Request $request)
-    {
+     /**
+     * Convert images from URLs specified in a CSV file to a downloadable ZIP file.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function convertZipFile(Request $request)
+    { 
         try {
             if ($request->hasFile('csv_file')) {
                 // Create a zip archive
-                $zipFileName = 'downloaded_images.zip';
+                $zipFileName = 'images.zip';
                 $zipFilePath = storage_path($zipFileName);
                 $zip = new ZipArchive();
 
                 if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
-                    // Read CSV file
+
                     $csv = $request->file('csv_file')->getRealPath();
                     $handle = fopen($csv, "r");
 
-                    // Array to hold sku and qty
                     $skuList = [];
 
                     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -34,7 +39,6 @@ class ImageZipController extends Controller
 
                     fclose($handle);
 
-                    // Query database to get image URLs based on SKUs from the CSV
                     $items = InventoryItem::whereIn('sku_code', $skuList)->get();
 
                     foreach ($items as $item) {
@@ -42,13 +46,11 @@ class ImageZipController extends Controller
                         $imageContent = file_get_contents($imageURL);
                         $imageFilename = basename($imageURL); // Get filename from URL
 
-                        // Save the image content to the zip archive
                         $zip->addFromString($imageFilename, $imageContent);
                     }
 
                     $zip->close();
 
-                    // Set headers to force download
                     return response()->download($zipFilePath, $zipFileName)->deleteFileAfterSend(true);
                 }
             }

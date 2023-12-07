@@ -21,7 +21,7 @@
     <div class="container">
         <form method="post" action="{{url('/login-data')}}">
             @csrf
-            <table class="table" style="width:150px; margin:40px auto">
+            <table class="table" style="width:150px; margin:80px auto">
                 <tr>
                     <td></td>
                     <td style="color:#1C5978; font-weight:bold; text-align:center">Login</td>
