@@ -19,17 +19,17 @@ class InventoryItemsController extends Controller
         // Open the CSV file for reading
         $handle = fopen($csvFile->getPathname(), 'r');
 
-        // Skip the header row
         fgetcsv($handle);
 
-        // Truncate the existing data in the table
+        // Truncate the existing data
         InventoryItem::truncate();
 
         // Process each row in the CSV file
         while (($row = fgetcsv($handle)) !== false) {
+
             // Assuming your CSV has columns 'Sku_Code' and 'Image'
-            $skuCode = $row[0]; // Adjust index based on your CSV structure
-            $image = $row[1];   // Adjust index based on your CSV structure
+            $skuCode = $row[0];
+            $image = $row[1];
 
             // Create or update the InventoryItem in the database
             InventoryItem::updateOrCreate(

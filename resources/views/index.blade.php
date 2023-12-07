@@ -1,19 +1,23 @@
 @extends('layouts.main')
 
-
 @section('index-page')
 
 <div class="col-md-12" style="height:70%; min-height:200px">
+
+    <!-- Display error message if available in the session -->
     @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
     @endif
+
+    <!-- Display success message if available in the session -->
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
+
     <div class="container">
         <form method="post" action="{{url('/login-data')}}">
             @csrf

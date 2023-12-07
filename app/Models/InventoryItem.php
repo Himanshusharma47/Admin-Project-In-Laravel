@@ -14,6 +14,7 @@ class InventoryItem extends Model
         'images',
     ];
 
+    // Get table from the database
     protected $table = 'inventory_items';
     public $timestamps = false;
 }
