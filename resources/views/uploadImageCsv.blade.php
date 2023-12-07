@@ -32,7 +32,7 @@
                     Upload Image File</div>
                 <div>
                     <!-- Form for uploading Csv File -->
-                    <form id="uploadForm" method="post" action="{{ url('image-data') }}" enctype="multipart/form-data">
+                    <form id="uploadForm" method="post" action="{{ route('image.data') }}" enctype="multipart/form-data">
                         @csrf
                         <table class="addpage-table">
                             <tr>

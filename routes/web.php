@@ -30,18 +30,18 @@ Route::controller(ViewController::class)->group(function() {
 });
 
 // login form data
-Route::post('/login-data', [LoginController::class, 'loginData']);
+Route::post('/login-data', [LoginController::class, 'loginData'])->name('login.data');
 // Log out the user
 Route::get('/logout', [LoginController::class, 'logout']);
 // Process the password change form data
-Route::post('/password-change-process', [LoginController::class, 'passwordChange']);
+Route::post('/password-change-process', [LoginController::class, 'passwordChange'])->name('password.change');
 
 // Process the uploaded image data
-Route::post('/image-data', [InventoryItemsController::class, 'imageData']);
+Route::post('/image-data', [InventoryItemsController::class, 'imageData'])->name('image.data');
 
 // Generate pdf
-Route::post('/generate-pdf', [CsvToPdfController::class, 'generatePdf']);
+Route::post('/generate-pdf', [CsvToPdfController::class, 'generatePdf'])->name('generate.pdf');
 
 // Generate a zip file
-Route::post('/generate-zip', [ImageZipController::class, 'convertZipFile']);
+Route::post('/generate-zip', [ImageZipController::class, 'convertZipFile'])->name('generate.zip');
 

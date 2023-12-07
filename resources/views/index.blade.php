@@ -19,7 +19,7 @@
     @endif
 
     <div class="container">
-        <form method="post" action="{{url('/login-data')}}">
+        <form method="post" action="{{ route('login.data')}}">
             @csrf
             <table class="table" style="width:150px; margin:80px auto">
                 <tr>

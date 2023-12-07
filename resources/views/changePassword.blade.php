@@ -30,7 +30,7 @@
                     style=" background:#F3F1F1;border:1px solid silver; font: bold 13px/13px arial ;padding:5px 0px 5px 15px ">
                     Change Password</div>
                 <div>
-                    <form method="post" action="{{ url('/password-change-process') }}">
+                    <form method="post" action="{{ route('password.change') }}">
                         @csrf
                         <table class="addpage-table">
                             <tr>

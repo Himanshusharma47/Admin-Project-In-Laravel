@@ -58,10 +58,10 @@
     function setAction(type) {
         var form = document.getElementById('uploadForm');
         if (type === 'pdf') {
-            form.action = '{{ url("/generate-pdf") }}';
+            form.action = '{{ route("generate.pdf") }}';
             form.submit();
         } else if (type === 'images') {
-            form.action = '{{ url("/generate-zip") }}';
+            form.action = '{{ route("generate.zip") }}';
             form.submit();
         }
     }
